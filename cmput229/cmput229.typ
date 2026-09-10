@@ -145,3 +145,91 @@ In RISC-V an integer is represented by 4 bytes (u32 or i32), a memory address re
 0x10001014 0x0B
 ```
 In a little-endian system the word would be `0x0000000B`, a big-endian system the word would be `0x0B000000`
+
+= Organization of a Computer & Memory Addressing
+A computer contains a processor and memory. The processor contains "registers", physically a register is a simple circuit that stores a number of HIGH/LOW voltages (which functionally acts as memory)
+
+Registers store data currently being used by the processor. 
+The processor and memory are connected by an "address bus" and "data bus". The address bus is a one-way data flow from the processor specifying the data address of interest. The data bus is a two-way data flow for transferring data
+
+The program counter is a special register that stores the memory address of the next instruction.
+The instruction register contains the current instruction to execute
+
+== RISC-V
+RISC-V is an open source architecture and instruction set made by Krste Asanovic and David Patterson
+
+
+== Arithmetic Operations
+Arithmetic operations follow three-operand notation (two sources and one destination), the destination being the location to store the result, the sources acting as the operands to the function
+
+Example:
+```riscv
+add a, b, c # a <- b + c
+addi a, b, 20 # a <- b + 20
+sub a, b, c # a <- b - c
+addi a, b, -20 # a <- b + -20 (note: no subi)
+```
+Immediate operands are literal constant values 
+
+Pseudo-instructions are instructions that map to one or more instructions (sometimes they may even be formally defined in the instruction set)
+
+```C
+f = (g + h) - (i + j);
+```
+Assume `f` `g` `h`, ... are all loaded into registers
+```riscv
+add t0, g, h # assuming f, h, j, i, g are registers (they're not)
+add t1, i, j
+sub f, t0, t1
+```
+More accurately `f <-> s0, g <-> s1, h <-> s2, i <-> s3, j <-> s4`, this distinction is arbitrary but it is important to keep track
+```
+add t0, s1, s2 # t0 <- g + h
+add t1, s3, s4
+sub s0, t0, t1
+```
+Arithmetic instructions use register operands, RISC-V has a 32 x 32-bit register file (i.e 32, 32-bit registers), registers are numbered from 0 to 31 (but these are NOT easily accessed like memory)
+A "word" is formed by 32 bits
+
+Registers are also given mnemonic names. 
+- t0, t1, ... t6 for temporary values
+- s0, s1, ..., s11 for saved values
+- Textbook uses the notation x0-x31
+
+== Addressing an Integer Array
+Memory is often displayed skipping by word size. A word is the most used data unit in a processor (In 32-bit RISC-V, a word has 4 bytes (32 bits))
+
+The `lw` (load word) instruction takes a value from memory into a specified register. The `sw` (store word) instructions take a value from a register and stores it into memory 
+
+```C
+A[0] = h + A[2]
+```
+Assuming `h <-> s2 A <-> s1`
+
+```asm
+lw t0, 8(s1)  # t0 <- A[2] 8 bytes into s1
+add t0, t0, s2 # t0 <- h + A[2]
+sw t0, 0(s1) # A[0] <- t0 (note that the first operand is the register containing data, not the destination)
+```
+
+== Register vs. Memory
+- Registers are faster to access than memory (no need to move through traces)
+- Operating on memory data requires loading and storing (more instructions)
+- Compiler will typically use registers for variables as much as possible
+  - Only spill to memory for less frequently used variables
+  - Register optimization is important for compilers
+
+=== Design Principle behind RISC-V
+The design principles behind RISC-V makes the common case fast (i.e small constants are common, immediate operands avoid an additional load)
+
+
+=== Memory Operands
+Main memory used for composite data (any l-value), words are aligned in memory (words must start on addresses that are divisible by 4 bytes)
+
+== Transferring Data between Memory and Registers
+=== A `lw` execution
+A third bus the "control bus" sends an instruction indicating whether the given instruction is a load/store for the data bus
+
+For a `lw` instruction the "Read" control is sent to the memory controller, alongside the address and send the data at the memory address to the data bus for the processor register to receive.
+
+Note instructions are also needed to be accessed from memory.
