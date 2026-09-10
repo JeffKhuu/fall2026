@@ -79,19 +79,6 @@ The universe is believed to have begun in the *Big Bang*, wherein the universe h
 
 The Big Bang essentially only produced two elements (hydrogen and helium) but since then the life cycle of stars has created heavier elements conducive for life.
 
-== The Local Sky
-The local sky is a model for compressing the vast distances between stars, planets and astronomical objects whereby the sky is mapped onto a hemisphere (dome) with the horizon being defined as the boundary between the Earth and the sky.
-
-The point directly overhead is called the *zenith*, the *meridian* is a half-circle stretching from the horizon due north to the horizon due south.
-
-We can use the local sky to pinpoint any location using the direction (angle/direction from the horizon) and its altitude (angle above the horizon)
-
-The deliberate lack of depth for astronomical objects in the local sky means we can describe objects using their *angular size* and distances using their *angular distance*, for more precision, each angular degree can be split into "arcminutes" (') and "arcseconds" (")
-
-$
-"angular size" / (360 degree) = "physical size" / (2 pi "distance")
-$
-
 = Understanding Earth
 
 == The Moon
@@ -114,3 +101,38 @@ A new moon occurs when the moon is approximately between the Earth and the sun b
 - A *waning crescent* rises before dawn, is highest at mid-morning and sets mid-afternoon
 
 The Moon's rotation is synchronous with its orbit on Earth (not by coincidence, it is caused by the Earth's gravitation affects) thus the Moon rotates $360degree$ approximately every 29.5 days.
+*Note: The seasons dissapear if there is no axial tilt*
+
+== The Celestial Sphere
+It is a hemispherical model on which stars on projected which acts as an abstraction to simplify the view of the sky.
+- We make the assumption that stars do not move
+- We assume that all stars are "infinitely" far away (such that the distances between each star is negligible)
+
+- We define the *horizon* to be the line between the sky and the ground
+- We define the *zenith* to be the point directly overhead
+- We define the *meridian* to be the line from the north to the south through the zenith)
+- An object is *transiting* when a celestial object crosses the meridian (the highest altitude point in its path)
+
+- The Earth's rotation turns the planet within the celestial sphere (from top down looking at the north pole, it appears to rotate counter clockwise )
+
+- Note: There are locations (within the arctic circle and below the antarctic circle) where the sun does not rise for periods of the year
+
+== Latitude and Longitude
+The coordinate system for the Earth. Edmonton is at $53.5degree "N" 113.5degree"W"$, the prime meridian is through Greenwich, England.
+
+$1degree = 60' "(arcminutes)"$
+
+$60\" = 60' "(arcseconds)"$
+
+== Celestial Vocabulary
+- North Pole -> North Celestial Pole
+- South Pole -> South Celestial Pole
+- Equator -> Celestial Equator
+- Latitude -> "Declination"
+- Longitude -> "Right Ascension"
+
+== Angular Distance
+$
+"physical size" = "angular size" / 360degree times 2 pi times "distance"
+$
+
