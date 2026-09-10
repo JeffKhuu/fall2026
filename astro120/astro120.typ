@@ -71,3 +71,40 @@ The entirety of space is immense, there are many non-uniformly spaced scales dep
 Galaxy groups and clusters are connected in filaments on the largest scales caused by gravity
 
 Most of the matter in the universe is dark matter, we know it exists however.
+
+= Sky Motions
+*Note: The seasons dissapear if there is no axial tilt*
+
+== The Celestial Sphere
+It is a hemispherical model on which stars on projected which acts as an abstraction to simplify the view of the sky.
+- We make the assumption that stars do not move
+- We assume that all stars are "infinitely" far away (such that the distances between each star is negligible)
+
+- We define the *horizon* to be the line between the sky and the ground
+- We define the *zenith* to be the point directly overhead
+- We define the *meridian* to be the line from the north to the south through the zenith)
+- An object is *transiting* when a celestial object crosses the meridian (the highest altitude point in its path)
+
+- The Earth's rotation turns the planet within the celestial sphere (from top down looking at the north pole, it appears to rotate counter clockwise )
+
+- Note: There are locations (within the arctic circle and below the antarctic circle) where the sun does not rise for periods of the year
+
+== Latitude and Longitude
+The coordinate system for the Earth. Edmonton is at $53.5degree "N" 113.5degree"W"$, the prime meridian is through Greenwich, England.
+
+$1degree = 60' "(arcminutes)"$
+
+$60\" = 60' "(arcseconds)"$
+
+== Celestial Vocabulary
+- North Pole -> North Celestial Pole
+- South Pole -> South Celestial Pole
+- Equator -> Celestial Equator
+- Latitude -> "Declination"
+- Longitude -> "Right Ascension"
+
+== Angular Distance
+$
+"physical size" = "angular size" / 360degree times 2 pi times "distance"
+$
+
