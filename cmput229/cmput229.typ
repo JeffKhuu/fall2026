@@ -233,3 +233,72 @@ A third bus the "control bus" sends an instruction indicating whether the given 
 For a `lw` instruction the "Read" control is sent to the memory controller, alongside the address and send the data at the memory address to the data bus for the processor register to receive.
 
 Note instructions are also needed to be accessed from memory.
+
+= Binary Representation of Instructions
+Instructions are data like anything in our computer. Instructions are encoded in a binary representation called "machine code"
+
+- RISC-V instruction representation is tried to be kept as "regular" as possible (meaning a small number of formats, applicable for many different instructions)
+
+- An instruction is encoded as a 32-bit instruction word.
+
+== R-Type
+Most arithmetic instructions of an R-Type. R-Types are represented in memory as
+```
+(31) funct7 | rs2 | rs1 | funct3 | rd | Opcode (0)
+```
+The opcode, func3 and func7 (for being 3 bits and 7 bits) tell the processor classify the instruction
+
+opcode: specifies the format (all formats contain an op-code in the lowest 7 bits) and operation of an instruction
+funct7/func3: together specifies the variant of an instruction to be exected
+rd: is the register destination operand
+rs1: is the first register source operand
+rs2: is the second register source operand
+
+```
+add t0, s7, s5
+```
+`t0 <-> x5`
+`s7 <-> x23`
+`s5 <-> x21`
+
+== I-Type
+I-Type instructions represent many instructions which utilize immediates
+```
+(31) immediate rs1 func3 rd op (0)
+```
+op is 7 bits
+rd is 5 bits
+func3 is 3 bits
+rs1 is 5 bit
+immediate is stored as 12 bits (these are in the same location as the funct7 and rs2 bits in the R-type)
+
+== S-Type
+```
+(31) imm[11:5] rs2 rs1 func3 imm[4:0] op
+```
+imm[4:0] and imm[11:5] represent slices of the immediate bytes
+these are stored separately to keep the regularity of the instruction set
+
+== U-Type
+These instructions only have destination registers and upper higher-order 20-bit immediate
+The remaining 12 bits of a 32-bit immediate are implicit zeros
+```
+imm[31:12] rd op
+```
+
+== Branching
+Branch statements are used for conditionals and loops (an unconditional branch is called a jump)
+Branch instructions will ask for a label, NOTE: labels are only used in assembly code, they do not exist outside of the code but represent an offset of the program counter to jump to.
+
+== SB-Type
+
+```
+(31) imm[12|10:5] rs2 rs1 func3 imm[4:1|11] op (0)
+```
+Immediate bits [10:5] are placed here because they match the S-Type instruction (similarly with bits [4:1])
+The highest order bit is also always the sign bit
+
+We stored an immediate because we must store the offset of the label. For example if the label is 3 instructions ahead (...0000 -> ...000C) we need to encode the difference (12) in 13-bit binary
+```
+12 -> 0 0000 0000 1100
+```
