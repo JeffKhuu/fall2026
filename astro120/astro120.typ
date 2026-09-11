@@ -136,3 +136,38 @@ $
 "physical size" = "angular size" / 360degree times 2 pi times "distance"
 $
 
+== Seasons & Phases
+- The stars position change throughout the day
+- The location of the earth in it's revolution around the Sun also effects the visible stars (see the notion of Summer Constellations and Fall Constellations)
+- Some stars, however, are always visible (all year, all night) (These are called "circumpolar")
+  - Circumpolar stars are always above the horizon
+  - Examples: Big Dipper, Little Dipper, etc.
+
+#example[
+  Suppose the constellation Gemini is directly overhead at midnight tonight. What time of day will Gemini be overhead in 6 months?
+]
+#solution[
+  The constellation will be visible at 12:00 rather than at 24:00. The same position on Earth will be in the middle of the day after six months. (See written notes)
+]
+
+The *ecliptic* is the apparent path of the Sun on the celestial sphere
+  - Our orbital motion projects the Sun into different constellations over the course of the year
+  - These constellations make up the zodiac
+The Earth's axis remains fixed and tilted (on the scale of about 26000 years) at $23.5degree$
+  - The tilt remains approximate the same angle (obliquity) but will slowly precess 
+
+- Because of the tilted apparent position of the Sun in terms of the celestial sphere, the Sun's path will move south (from June to December)
+- During the Summer, the northern hemisphere receives more sunlight per unit area and the sun stays above the horizon longer
+
+The Figure-8 analemma up-down motion is caused by the shift in the ecliptic over the calendar year, the side-to-side motion is caused by the changing speed of the Earth's orbital rotation
+
+The spherical nature of the Earth gives rise to the fact that sun rays directed closer to the Equator result in more sunlight per unit area (in the same given season/month)
+
+*Misconceptions*
+- "The Earth's orbit is elliptical so the Earth is closer to the Sun in the summer than in the winter" (There is a negligible impact)
+- "When the Earth is tilted toward the Sun, the hemisphere tilted toward the Sun is closer than the one pointed away" (This is also a negligible effect, compared to the distance to the Sun the difference is small (0.01%))
+
+The real cause still remains the tilt of the Earth towards the Sun.
+
+The extremes of the seasons lag behind the time of maximum / minimum _insolation_ (i.e the hottest day is not during the Summer solstice, June 21st)
+  - This is because it takes time for the Earth to heat up /cool down
