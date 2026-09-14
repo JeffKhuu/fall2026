@@ -103,6 +103,22 @@ A new moon occurs when the moon is approximately between the Earth and the sun b
 The Moon's rotation is synchronous with its orbit on Earth (not by coincidence, it is caused by the Earth's gravitation affects) thus the Moon rotates $360degree$ approximately every 29.5 days.
 *Note: The seasons dissapear if there is no axial tilt*
 
+We can determine whether the phase is waxing/waning crescent depending on the side of the moon that is lit (left => waning crescent (in the northern hemisphere))
+
+In the northern hemisphere,
+D => Waxing
+O => Full Moon
+C => Waning
+
+In the southern hemisphere,
+C => Waxing
+O => Full Moon
+D => Waning
+
+=== Rising and Setting Times
+- Time of day is defined by your position on Earth
+- You can figure out the time using mental geometry, assuming the sunlight comes from a single direction, the rising/setting times can be determined by your vision and rotating your head (counterclockwise)
+
 == The Celestial Sphere
 It is a hemispherical model on which stars on projected which acts as an abstraction to simplify the view of the sky.
 - We make the assumption that stars do not move
@@ -171,3 +187,39 @@ The real cause still remains the tilt of the Earth towards the Sun.
 
 The extremes of the seasons lag behind the time of maximum / minimum _insolation_ (i.e the hottest day is not during the Summer solstice, June 21st)
   - This is because it takes time for the Earth to heat up /cool down
+
+== Lunar Phases
+- Moon phases arise from the moon's orbit around Earth, depending on the time of the month, we see different parts of it illuminated
+- The same side is always facing the Earth (nearside) due to tidal locking
+
+We always see the same face, but time lapsed we see it wobble (this is due to the elliptical orbit and the difference between perigee and apogee) 
+
+A "super moon" is a full moon when the moon is at perigee (it will appear roughly 7% larger)
+
+== Eclipses
+Eclipses occur when the Sun, Moon and Earth all lie in a (near) perfect line. The shadow of the eclipsed object is projected onto another
+
+The orbital planes are not parallel, there are two "seasons" for eclipses that are available, similarly the wobble "precession" of the moon leads to a predictable cycle for eclipses ("Saros cycle"), every 18 years and 11.33 days
+
+=== A Solar Eclipse
+An eclipse where sol is eclipsed, creates the "umbra" in which the complete sun will be blocked out and the "penumbra"
+
+Only certain parts of the Earth get a solar eclipse (and "total solar eclipse") because of the size of the umbra
+
+Occur only during **new moon** (EXAM!)
+
+- "Partial" => Only in the penumbra
+- "Annular" => The Moon is too far for the umbra to strike the surface (ring around the moon)
+- "Total" => Sun completely eclipsed by moon
+
+=== A Lunar Eclipse
+An eclipse where the moon is eclipsed
+
+During a lunar eclipse, we can see red light projected onto the moon (red, for the same reason sunsets are red)
+
+- "Partial" only part of the moon is found in the umbra
+- "Penumbral" => moon is not carried through the umbra of the Earth
+
+Occur only during **full moon** (EXAM!)
+
+
