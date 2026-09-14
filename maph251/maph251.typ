@@ -29,8 +29,12 @@
   secondary: upper[#UNIVERSITY \ #SEMESTER],
 )
 #let fode(dependent, independent) = $(dif dependent) / (dif independent )$
+#let fopde(dependent, independent) = $(partial dependent) / (partial independent )$
 #let de(dependent, independent, order) = {
   return $(dif^order dependent) / (dif independent^order)$
+}
+#let pde(dependent, independent, order) = {
+  return $(partial^order dependent) / (partial independent^order)$
 }
 
 
@@ -165,5 +169,68 @@ Here is a simplified overview of all of these techniques
     - $D(x) = a x^2 + b x + c -> (A x + B) / (a x^2 + b x + c)$
     - $D(x) = (a x + b)^n -> A_1 / (a x + b)^n + ... + A_n / (a x+ b)$
 - Knowing a number of common integrals is also important, this includes trigonometric, hyperbolic, inverse trigonometric, logarithmic, etc.
+
+== Differential Equations of Homogeneous Functions
+#definition(
+  name: "Differential Form",
+)[The differential form for a quasilinear first order differential equation:
+  $
+    M(x,y)dif x + N(x, y)dif y = 0
+  $]
+
+#definition(name: "Homogeneous Function")[
+  A function $f$ is homogeneous of degree $n$ if and only if the following holds
+  $
+    f(t x, t y, ...) = t^n f(x, y, ...)
+  $
+]
+
+A differential equation with $M$ and $N$ both homogeneous with degree $n$ can be written as
+$
+  fode(y, x) = f(x,y) = -M(x,y)/N(x,y)
+$
+where $f$ is now homogeneous of degree 0. This being the case, we can make the substitution $z equiv y/x$, turning the bivariate function $f$ into a single variable function $f(1, z)$
+
+It also follows from differentiating $z$ that $fode(y, x) = fode(z, x)x + z$, ultimately transforming the differential equation into the separable form
+$
+  (dif z)/(f(1, z)- z) = (dif x) / x
+$
+
+== Exact Differential Equations
+Consider a smooth relation of the form $f(x,y) = c$, we can implicitly differentiate this relation to obtain the equation
+$
+  dif / (dif x) (f(x, y)) = (partial f)/(partial x) + (partial f)/(partial y) (dif y)/(dif x) = 0
+$
+which takes a similar form to the differential form. This begs the question whether we are able to find a function $f(x,y)$ such that $(partial f)/(partial x) = M(x,y)$ and $(partial f)/(partial y) = N(x,y)$
+
+$
+  M(x,y) dif x + N(x,y) dif y = 0 "is exact" arrow (partial M)/(partial y) = (partial N)/(partial x) "on an open region," D
+$
+
+The converse requires a slightly stricter restriction on the domain. The converse requires #fopde($M$, $y$) and #fopde($N$, $x$) are continuous everywhere on a simply connected domain.
+$
+  fopde(M, y) = fopde(N, x) arrow M(x,y) dif x + N(x,y) dif y = 0 "is exact"
+$
+A simply connected domain is one in which any curve can be contracted continuously into a single point without leaving the domain. (No holes in the domain)
+
+To solve an exact differential equation we can consume one of our functions $M$ or $N$ to find an answer through partial integration
+$
+  f(x,y) = integral_(x_0)^x M dif x + phi(y) \
+  (partial f)/(partial y) = N(x, y) => integral_(y_0)^y integral_(x_0)^x M dif x + phi'(y) dif y = N(x, y)
+$
+We hold on to the belief that $phi'(y)$ will be a function of only $y$ after algebraic elimination.
+== Integrating Factors
+Exact equations are difficult to come by, luckily we can find attempt to find an integrating factor, $mu(x, y)$ such that
+$
+  (partial (mu M))/(partial y) = (partial (mu N))/(partial x)
+$
+Using implicit differentiation, we can attempt to isolate for $mu$
+$
+  (partial (mu M))/(partial y) = (partial (mu N))/(partial x) arrow fopde(mu, y) M + mu fopde(M, y) = fopde(mu, x)N + mu fopde(N, x) arrow mu ( fopde(N, x) - fopde(M, y) ) = N fopde(mu, x) - M fopde(mu, y)
+$
+
+At this point, solving this linear first-order partial differential equation is just as difficult as the quasi-linear first order differential equation. However, we can attempt to guess at solutions by taking $mu$ as a function of $x$ or $y$ alone.
+
+Once we have our integrating factor, we can solve for the solution using the same strategy as exact expression.
 
 == Linear Differential Equations
