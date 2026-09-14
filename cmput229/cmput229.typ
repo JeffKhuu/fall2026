@@ -290,6 +290,8 @@ imm[31:12] rd op
 Branch statements are used for conditionals and loops (an unconditional branch is called a jump)
 Branch instructions will ask for a label, NOTE: labels are only used in assembly code, they do not exist outside of the code but represent an offset of the program counter to jump to.
 
+Branching instructions utilize the SB-Type instruction.
+
 == SB-Type
 
 ```
@@ -302,3 +304,29 @@ We stored an immediate because we must store the offset of the label. For exampl
 ```
 12 -> 0 0000 0000 1100
 ```
+
+In 32-bit RISC V, it is viable for there to be 2 implicit zeros (since all instructions must be on addresses divisible by four), however, to increase regularity with 16-bit RISC V, only a single implicit zero
+
+== Zero
+x0 is the register with the constant zero, it is hard-wired and grounded therefore cannot be overridden
+The constant zero is useful for a number of intructions
+- moving between registers `add t2, s1, zero`
+- setting a variable to 0 `add s4, zero, zero`
+- performing unconditional jumps `jal zero LABEL`
+
+== Jumping
+Jumping is an unconditional branching to an address. `jal` (jump-and-link) has a longer range than a branch instruction as a consequence of not needing to specify source resources
+
+The 'and-link' portion of the instruction, takes a register to store the return address, `ra` is the return address register and is typically the register passed with `jal`
+
+== UJ-Type
+The UJ-Type is the "unconditional jump" type that can store a 21 bit immediate (22 bit implicit)
+```
+(31) imm[20|10:1|11|19:12] rd op (0)
+```
+Bits 12-19 are stored in there position for regularity (they take the place of funct3 and rs1)
+The sign bit is still the most significant bit
+
+It is uncommon for humans to need to parse the immediate value by hand, thus RISC V prefers a hardware-oriented binary format which promotes regularity
+
+= Logic Instructions
