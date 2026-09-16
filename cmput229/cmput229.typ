@@ -330,3 +330,65 @@ The sign bit is still the most significant bit
 It is uncommon for humans to need to parse the immediate value by hand, thus RISC V prefers a hardware-oriented binary format which promotes regularity
 
 = Logic Instructions
+`slli` (Shift Left Logical Immediate) is used to used to shift the bits in a source register `rs1` to a destination register `rd` by the immediate
+
+For a base-2 unsigned number, a logical left shift is equivalent to multiplying the number by two (2^4 -> 2 \* 2^4 -> 2^5).
+
+Left shifts can be used for
+- Quick multiplication by 2
+```
+slli t2, s0, k -> t2 = s0 * 2^k
+```
+- Moving lower half of a word to the upper half
+
+Shifts with an immediate use a *modified* I-Type format
+```
+(31) func6 immediate[5:0] rs1 func3 rd op (0)
+```
+This modified I-Type format does not show up on the green sheet.
+- A shift only needs the lower 6 bits of the I-type format's 12 bit immediate, thus the additional bits are used to classify the logical instruction
+
+`sll` shifts the first source register `rs1` by the value stored in `rs2` and stores the result in `rd`, this is an R-Type instruction
+
+Likewise, logical right shifts work intuitively.
+
+== A quick aside on decimal-binary conversation
+In decimal,
+
+$9,9990,099 = 10,000,000 - 10,000 + 100 - 1 = 10^7 - 10^4 + 10^2 - 10^0$
+
+Likewise in binary
+
+$0001 1111 1100 0111 1100 = 2^17 - 2^10 + 2^7 - 2^2 = (2^6 - 1) times 2^10 + (2^5 - 1) times 2^2 = ... $
+
+which is much easier to compute.
+
+== Arithmetic Right Shift
+*Arithmetic right shifts (`srai`)* keep the convention that shifting performs integer division by powers of two
+- No arithmetic left shift
+- The arithmetic will pad (to the right) by the sign-bit
+- The equivalent non-immediate instruction is `sra`
+
+== Bitwise Logical Operations
+`and` is a bitwise and acting on 2 registers and taking the "logical and" FOR EACH bit. Note the difference between "bitwise and" and "logical and" (for $1010_2$, $0101_2$ bitwise and will return $0000_2$ while a "logical and" would return true)
+
+Similarly a bitwise `or` and bitwise `xor`
+
+There also exists immediate versions of each logical operation
+
+`xor _, _, -1` performs a bit-flip
+- two 32-bit numbers will only be zero if they are the same!
+
+A workaround to an error in RARS is to represent negative (or hexadecimal values) as their decimal value for logical instructions
+Loading an immediate and shifting can perform a bitmask to similarly achieve a comparison of bits
+
+== Aside on Pseudo-instructions
+`li` can load an up-to 32-byte immediate into a register
+
+```
+lui s0, 0x0FFF
+li s1, 0xF00
+or s0, s0, s1
+```
+NOTE: `addi` is harder to reason about because the immediate is SIGN-EXTENDED! (WATCH OUT FOR THIS)
+

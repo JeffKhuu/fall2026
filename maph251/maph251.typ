@@ -234,3 +234,10 @@ At this point, solving this linear first-order partial differential equation is 
 Once we have our integrating factor, we can solve for the solution using the same strategy as exact expression.
 
 == Linear Differential Equations
+First order linear differential equations are of the form
+$
+fode(y, x) + P(x) y = Q(x)
+$
+These equations are a special case of the integration factor, where $mu = e^(integral P(x)) dif x$.
+
+Notice that after applying the factor, the term including the first derivative and linear term take the form of the result of applying the product rule. This allows us to solve for $y$ explicitly as a function of $x$
