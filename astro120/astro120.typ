@@ -101,7 +101,7 @@ A new moon occurs when the moon is approximately between the Earth and the sun b
 - A *waning crescent* rises before dawn, is highest at mid-morning and sets mid-afternoon
 
 The Moon's rotation is synchronous with its orbit on Earth (not by coincidence, it is caused by the Earth's gravitation affects) thus the Moon rotates $360degree$ approximately every 29.5 days.
-*Note: The seasons dissapear if there is no axial tilt*
+*Note: The seasons disappear if there is no axial tilt*
 
 We can determine whether the phase is waxing/waning crescent depending on the side of the moon that is lit (left => waning crescent (in the northern hemisphere))
 
@@ -206,7 +206,7 @@ An eclipse where sol is eclipsed, creates the "umbra" in which the complete sun 
 
 Only certain parts of the Earth get a solar eclipse (and "total solar eclipse") because of the size of the umbra
 
-Occur only during **new moon** (EXAM!)
+Occur only during *new moon* (EXAM!)
 
 - "Partial" => Only in the penumbra
 - "Annular" => The Moon is too far for the umbra to strike the surface (ring around the moon)
@@ -220,6 +220,35 @@ During a lunar eclipse, we can see red light projected onto the moon (red, for t
 - "Partial" only part of the moon is found in the umbra
 - "Penumbral" => moon is not carried through the umbra of the Earth
 
-Occur only during **full moon** (EXAM!)
+Occur only during *full moon* (EXAM!)
+- Red Moon is due to blue light being scattered (due to particles or lensing)
 
+= History of Astronomy (and Science)
+#definition(name: "Retrograde Motion")[The apparent motion from passing an observed planet. Characterized by an apparent vertical-S-like curve in a planet's trajectory]
 
+#definition(name: "Stellar Parallax")[
+  The parallax motion of the stars. The viewing of an object from two different perspectives causes a different position with respect to a background. 
+]
+
+The stellar parallax on Earth is small (1" or 1 arc second) and undetectable to the naked eye.
+
+== Early Astronomy
+All ancient peoples utilized astronomy (and at the very least recorded sky motions). For example, the moon was used in equatorial Africa to predict the rain
+
+The primary goal was a source of season tracking and timekeeping. Astronomy was also a source of fixed patterns, in an otherwise chaotic world
+
+Early astronomy was also the birth of careful and repeatable measurement of data, especially reproducibility. A key to science.
+
+=== Timekeeping
+This also led to the creation of many different conventions for timekeeping. The Gregorian calendar, Julian calendar, Lunar calendars, etc.
+
+Following lunar cycles results in a drift (desync) between years and seasons, which has also led to different conventions for correction
+
+See how similar observations have led to vastly different conclusions
+
+=== Greek Astronomy
+Greek astronomy remains prevalent (and remembered) because it survives with records. (Does not necessarily imply, they were more intellectual or the only ones) but also for the Greek's affinity for *scientific modeling*
+
+#definition(name: "Scientific Model")[An intellectual abstraction for describing and predicting the behaviour of a system]
+
+The whole of science can be regarded as the development, correction and testing of *models!*
