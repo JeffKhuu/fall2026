@@ -249,6 +249,106 @@ See how similar observations have led to vastly different conclusions
 === Greek Astronomy
 Greek astronomy remains prevalent (and remembered) because it survives with records. (Does not necessarily imply, they were more intellectual or the only ones) but also for the Greek's affinity for *scientific modeling*
 
-#definition(name: "Scientific Model")[An intellectual abstraction for describing and predicting the behaviour of a system]
+#definition(name: "Scientific Model")[An abstraction of a system describing and predicting the behaviour of that system]
 
 The whole of science can be regarded as the development, correction and testing of *models!*
+
+Ancient Greece had many reasons to believe in a geocentric model, including an explanation on how we remain on the Earth, as well as sense of importance but most importantly because there was no observed stellar parallax
+
+Although, many Greek philosophers also held the belief of heliocentric models due to their explanation of retrograde motion
+
+=== Eastern Philosophy
+During medieval and dark ages, scientific inquiry and practice moved to Eastern cultures (creating he Islamic Golden age)
+
+Adopting Ancient Greek practices and texts, centered around Baghdad. Their legacy is kept in the names of many stars due to their astronomical star names.
+
+== Copernican Revolution
+Greek ideas with Islamic refinement were reintroduced into Europe, with the advent of more precise observations began to illustrate the idea that the speed of planets were not uniform (requiring many epicycles on a Ptolemaic model)
+
+=== Nicholas Copernicus
+The issues with the Ptolemaic model motivated Nicholas Copernicus proposed a new heliocentric model (but kept the epicyclic motion from the Ptolemaic model)
+
+Despite this, not many more interesting insights could be provided by the model
+
+=== Tycho Brahe
+Tycho Brahe was detail-oriented and dedicated his life to tedious astronomical observations to improve ancient Greek data
+
+Used naked eye observation to chart planetary motions to an unprecedented 1 arc minute accuracy. Also recorded a supernova in 1572.
+
+=== Johannes Kepler
+Worked under Tycho Brahe, used Brahe's data to attempt to develop a new model which described planetary motion
+
+Replacing cyclic motion with elliptical motion allowed the model to fit the data much better.
+#definition(name: "Ellipses")[
+  The "major axis" is the longest size of an ellipse, the semimajor axis is half of this axis denoted $a$
+
+  The distance from the center to the focus is denoted $c$
+
+  The eccentricity is denoted $e = c/a$
+
+  A circle is a special case of an ellipse with $e = 0$
+]
+
+== Kepler's Three Laws
++ Planets follow elliptical orbits with the Sun at one focus (and nothing at the other)
++ As planet moves around its orbit, it sweeps out equal areas in equal time (farther from the sun => faster)
++ More distant planets move around the sun more slowly following $P^2 = a^3$ (NOTE, P must be in years and $a$ must be i astronomical units)
+
+"Peri-" => Close, "Ap-" => Faraway 
+
+Near the sun means "perihelion" and similarly farthest away from the sun is "aphelion"
+
+Nearest to the Earth means "perigee" and similarly farthest away from the Earth is "apogee"
+
+$
+r_"perihelion" = a(1-e)
+$ 
+$
+r_"aphelion" = a(1+e)
+$ 
+
+Note that Kepler produces *Laws* rather than *theories* because the results were entirely based on observations and not models. (It is a conjectured form, not an underlying theorem)
+The result of Kepler's laws caused the slow jettisoning of the Ptolemaic model
+
+== Galileo
+- Adapted the telescope for science
+- Found sun spots, moons orbiting around Jupiter (disproved that bodies only orbited Earth)
+- Observed phases of Venus (Proved the impossibility of a geocentric model, and recall that Venus is never seen far from the Sun (at midnight))
+
+Other science like Foucault's pendulum and stellar aberration also demonstrated that the Earth was moving and rotating around the Sun
+
+== The Nature of Science
+The Copernican Revolution was a microcosm of the scientific process: The revision of a model to fit observational (empirical) data for more accurate and predictive model
+
+Science is essentially the development of models and methods to refine ideas about our world
+- Models should fit observations
+- Models should make predictions
+- Evidence should be repeatable
+- Models are falsifiable
+
+Pseudosciences like astrology are born from a common parent (Galileo, Ptolemy, Kepler were all astronomers AND astrologers)
+- Given astronomy's strong predictive capabilities, astrology rose up to attempt to predict events/personalities
+- Astrology also gave way to many symbols $sun$ $mercury$ $venus$ $earth$ etc.
+However, astrology is not a science, because they are manifestly falsifiable
+Tests of the validity of astrology have given negligible credence.
+
+#definition(name: "Occam's Razor")[
+  The idea that simpler theories are better. Taken as a "rule of thumb"/heuristic in science. Complexity can require more evidence
+]
+
+#definition(name: "Observation")[A datum or set of data that describe the world (under repeatable circumstances)]
+#definition(name: "Law")[A reliable mathematical description for how the world works]
+#definition(name: "Hypothesis")[A proposed theory without sufficient testing]
+#definition(name: "Theory")[A falsifiable model that explains the behaviour of the observable world and has been subject to testing]
+
+Science is constructed to be antagonistic, ideas will be criticized and tested to prove its worth
+
+The scientific consensus, is a body of ideas for which _most_ scientists agree (ex. Newton's Law of Gravitation)
+
+"Extraordinary claims require extraordinary evidence."
+
+The methods of science include collecting data, data analysis and writing a *peer-reviewed* journal articles
+
+In academia, we receive rewards for _high-impact_ frequent publication (publish or perish)
+
+We should remember that the "pure scientific method" is a subset of how scientists actually practice science which is further a subset of how humanity uses science.

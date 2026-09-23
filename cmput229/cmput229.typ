@@ -380,7 +380,7 @@ There also exists immediate versions of each logical operation
 - two 32-bit numbers will only be zero if they are the same!
 
 A workaround to an error in RARS is to represent negative (or hexadecimal values) as their decimal value for logical instructions
-Loading an immediate and shifting can perform a bitmask to similarly achieve a comparison of bits
+Loading an immediate and shifting can perform a bit mask to similarly achieve a comparison of bits
 
 == Aside on Pseudo-instructions
 `li` can load an up-to 32-byte immediate into a register
@@ -392,3 +392,116 @@ or s0, s0, s1
 ```
 NOTE: `addi` is harder to reason about because the immediate is SIGN-EXTENDED! (WATCH OUT FOR THIS)
 
+= Storing Arrays
+Recall that the following C syntax is equivalent `a[i]` to `*(a+i)`. Similarly in RISC-V assembly, the value in an array, A (with the address stored in some register) of type T will be stored at `A + sizeof(T)*i`
+
+An example using a null-terminated string
+```
+add t1, s4, to # t1 <- name + k
+lbu s0, 0(t1) # x <- name[k] (note lbu, not lw)
+```
+
+If the array contains 32-bit integers, $i$ needs to be multiplied by 4 (`slli t0, t0, 2`) to correct index by the size of the data
+
+= Conditional Instructions and Loops
+We have learnt about different types of branch instructions `beq`, `bne`, `bgeu`, etc. as well as unconditional jumps like `jal`. We will now study basic loops and conditionals
+
+== While Loops
+For the following C code, with the assumption `i := s3` `j := s4`, `k := s5`, `base of save := s6` (where save is an array of 32-bit ants)
+```C
+while(save[i] == k)
+    i = i + j;
+```
+
+```
+slli t1, s3, 2 # t1 <- i * 4
+slli t2, s4, 2 # t2 <- j * 4
+add t1, s6, t1
+Loop: lw t0 0(t1)
+bne t0, s5, doneLoop
+add s3, s3, s4 # loop body
+add t1, t1, t2 # increment 
+jal zero, Loop
+doneLoop:
+  ...
+...
+```
+
+== Signed vs Unsigned Comparison
+`slt` and `sltu` `slti`, etc. always compare using signed semantics (that is, negative numbers can exist)
+```
+slt t0, s0, s1 #signed
+```
+False if $-1_10$
+```
+sltu t0, s0, s1 #unsigned
+```
+True if $-1_10$ since that is $2^32-1 $
+
+Note this allows us to make the comparison $0 <= x <= y$ very easily. In essence $x < 0 or x >= y$ can be made using the instruction
+```
+bgeu x, y, someLabel
+```
+True when x is negative in two's complement and true when x is greater than the bounds of y
+
+== Basic Block
+A basic block is a sequence of instructions with *no branch targets* (except at the beginning), *no embedded branches* (except at the end)
+
+This gives us the guarantee that if the top of the block is executed, the bottom block of the sequence is also executed
+
+= Programming Example
+The `la` (load address) pseudo instruction allows us to retrieve the address of certain parts of a RISC-V program (labels but also specific parts of the `Data` segment of our program)
+
+`la` is a pseudo instruction which is comprised of a `auipc` (add upper immediate program counter, which stores the program counter + immediate to a given register) and an `addi` (to the program counter)
+
+`jalr` is an instruction which means "jump and link register", which jumps to the memory address stored in a given register
+
+See slides for full example. Most important thing to remember is that in order to compare bitmasks, a branch instruction is required (since you can compare the bits like numbers)
+
+= Procedure Calls
+A *Callable Unit* is something we understand to be able to be called (perform work and then return)
+- Procedure
+- Function (Can be pure vs. non-pure)
+- Routine
+- Subroutine (This is a common nomenclature for assembly functions)
+- Subprogram
+- Method (Associated with Object-Oriented Programming)
+
+A function that does not call any other functions is called a *leaf function* (think, leaf node in a tree)
+
+*Any none leaf function is a "caller"* All functions are trivially "callee"s by the nature that they are a function and expect to be called.
+
+In RISC-V there is only a single register, `ra` to store the return address, but if we have multiple non-leaf function calls, how is the value of `ra` saved before being overridden by another function call? *The stack frame*
+
+== What goes into the stack
+- the value of the register `fp` (frame pointer)
+- the value of the register `ra` (if the function calls another function)
+- registers that are modified by the function
+- local variables
+
+The top of stack typically starts at the end of memory and moves towards lower memory addresses (the start of free memory on the stack is given by the stack pointer, `sp` is a special register that contains the ADDRESS o the top of the stack)
+
+Before returning, non leaf functions must
++ Restore the value of `fp`, `ra`, etc.
++ Increment the stack pointer (to free the stack frame)
++ Then return to the address given by `ra`
+
+`gp` is the global pointer, which points to the data segment for easy offset into static data
+
+= Calling Conventions
+All instruction sets more or less will give a number of conventions, while optional, these give a framework for code to work together (especially between developers)
+
+These conventions usually ensure the safety of some register state. Without convention, saving the entire register file is required to ensure state is preserved
+
+The conventions:
++ Any values that are stored in s0-s11 must be the same before and *after* calling a subroutine
++ Callee must save the values of s0-s11 (if they utilized them, leaf functions often don't)
++ Before returning, the callee must restore the value of s0-s11 (if they have been mutated)
+
++ Any values that are stored in t0-t6 or a0-a7 have *no* guarantee before and *after* calling a subroutine (especially the `a` registers since presumably you are getting a returned value)
+  + This means callees can use, t0-t6 and a0-a7 freely
+
+== Registers Used for Procedure Calls
+`a0-a1` are the two registers in which to pass parameters, and for return values
+`a2-a7` are six arguments in which to also pass parameters
+If more arguments are needed to be passed, then space should be made on the stack and a pointer be passed through the `a` registers
