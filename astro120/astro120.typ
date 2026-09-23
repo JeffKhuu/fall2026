@@ -352,3 +352,9 @@ The methods of science include collecting data, data analysis and writing a *pee
 In academia, we receive rewards for _high-impact_ frequent publication (publish or perish)
 
 We should remember that the "pure scientific method" is a subset of how scientists actually practice science which is further a subset of how humanity uses science.
+
+
+== Newton's Law
+Newton's Laws of Motion were adopted because they correctly estimated the motion of objects despite the true nature of friction/air resistance
+
+Newton also correctly conjectured that these laws were universal.

@@ -499,9 +499,101 @@ The conventions:
 + Before returning, the callee must restore the value of s0-s11 (if they have been mutated)
 
 + Any values that are stored in t0-t6 or a0-a7 have *no* guarantee before and *after* calling a subroutine (especially the `a` registers since presumably you are getting a returned value)
-  + This means callees can use, t0-t6 and a0-a7 freely
+  + This means callees can use, t0-t6 and a0-a freely
 
 == Registers Used for Procedure Calls
 `a0-a1` are the two registers in which to pass parameters, and for return values
 `a2-a7` are six arguments in which to also pass parameters
 If more arguments are needed to be passed, then space should be made on the stack and a pointer be passed through the `a` registers
+
+== Caller-Save vs. Callee-Save
+Registers can be categorized into Caller-Save vs. Callee-Save. Caller-Save require the register to be saved by the caller if they care about the contents of the register, Callee-Save require the register to be saved by the callee if they care about the contents of the register 
+
+`ra` is caller-save, `sp` is callee-save `t0-t6` are caller-save `s0/fp` (the `x8` register) is callee-save `s1-s11` are also callee-save, `a0-a7` is caller-save (by intended design) 
+
+== How is a function called?
+A function cannot be executed unless it is called by another function ($-> "every function is a callee"$)
+Every function is expected to save the `s0-s11` registers
+
+Leaf functions do not call other functions, and can manipulate callee-save registers without having to worry about saving/restoring their original values
+
+== The need for a Frame Pointer
+```c
+int bar() {
+  int x, y;
+  x = x+y;
+  if(...) {
+    int a[3];
+    y = x+y;
+  }
+  x =x+y;
+}
+```
+
+How much space should be allocated on the stack? We need space for `x`, `y` and also `ra`
+
+The statement `x = x + y` requires that we load `x`, `y` from memory
+```
+lw t0, 4(sp) # t0 <- x
+lw t1, 0(sp) # t1 <- y
+add t0, t0, t1 # t0 <- x + y
+sw t0, 4(sp)
+```
+
+When we reach the if-statement (and its inner scope), we allocate space on the stack for `a`. But now how would you load the values of `x` and `y`? Since the stack pointer has moved
+
+The frame pointer always points at the beginning of a function's stack frame (most significant address)
+- If we decide to use the frame pointer, both the stack pointer and the frame pointer need to be changed
+```
+lw t0, -4(fp) # t0 <- x
+lw t1, -8(fp) # t1 <- y
+add t0, t0, t1 # t0 <- x + y
+sw t0, -4(fp)
+```
+
+== A conventional function example
+```asm
+findLargest:
+  # a0 is a pointer to an array of integers
+  # a1 is the length of the array
+  # a2 is an index into a comparator function
+  #   takes the values to comapre in a0 and a1
+  # register usage:
+  # s0 still store the address of the currently largesg=1
+  # s1 wil store the address of my current elem
+  # s2 will store the current index
+  # s3 will store length
+```
+
+```
+pseudocode:
+maximalElem <- a[0]
+curInd <- 1
+while curInd < length:
+  cmp(maxialEemem
+  if a0 == 0:
+    maximalElem <-  a[cur]
+  ++cur
+)
+return maximalElem
+```
+
+```
+sw ra -4(sp) # store ra in the next word
+sw s0 -8(sp)
+sw s1 -12(sp)
+sw s2 -16(sp)
+sw s3 -20(sp)
+addi sp, sp, -20
+mv s1, a0 # a0 <- &a[0]
+
+...
+
+addi sp, sp, 20
+lw ra -4(sp)
+lw s0 -8(sp)
+lw s1 -12(sp)
+lw s2 -16(sp)
+lw s3 -20(sp)
+ret
+```
